@@ -1,39 +1,26 @@
-<style>
-    body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-        background-color: #f0f0f0;
-    }
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>メンバーカード</title>
+    <style>
+        body { display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background-color: #f5f5f5; font-family: sans-serif; }
+        .card { width: 300px; height: 180px; background: #2c3e50; color: white; border-radius: 12px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); text-align: center; }
+        .name-area { font-size: 24px; font-weight: bold; margin-top: 50px; border-bottom: 2px solid #ecf0f1; padding-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div>MEMBER CARD</div>
+        <div class="name-area" id="displayName">読み込み中...</div>
+    </div>
 
-    .card {
-        width: 350px;  /* 画像の比率に合わせて調整してください */
-        height: 220px;
-        border-radius: 15px;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        
-        /* --- ここが背景画像の設定 --- */
-        background-image: url('background.jpg'); /* アップロードしたファイル名 */
-        background-size: cover;    /* 枠いっぱいに広げる */
-        background-position: center; /* 中央合わせ */
-        position: relative;
-        color: white; /* 画像の上で文字が見やすい色に */
-    }
-
-    .name-area {
-        position: absolute;
-        top: 110px;  /* デザインの「名前欄」の位置に合わせて調整 */
-        left: 0;
-        width: 100%;
-        text-align: center;
-        font-size: 24px;
-        font-weight: bold;
-        text-shadow: 1px 1px 4px rgba(0,0,0,0.6); /* 文字を読みやすくする影 */
-    }
-</style>
-
-<div class="card">
-    <div class="name-area" id="displayName">読み込み中...</div>
-</div>
+    <script>
+        // URLの「?n=名前」から名前を抜き出して画面に表示する魔法
+        const urlParams = new URLSearchParams(window.location.search);
+        const userName = urlParams.get('n') || 'ゲスト';
+        document.getElementById('displayName').innerText = userName + ' 様';
+    </script>
+</body>
+</html>
