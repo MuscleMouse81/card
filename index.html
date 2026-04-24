@@ -1,39 +1,68 @@
-<style>
-    body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-        background-color: #f0f0f0;
-    }
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>メンバーカード</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: sans-serif;
+        }
 
-    .card {
-        width: 350px;  /* 画像の比率に合わせて調整してください */
-        height: 220px;
-        border-radius: 15px;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        
-        /* --- ここが背景画像の設定 --- */
-        background-image: url('new-design.png'); /* アップロードしたファイル名 */
-        background-size: cover;    /* 枠いっぱいに広げる */
-        background-position: center; /* 中央合わせ */
-        position: relative;
-        color: white; /* 画像の上で文字が見やすい色に */
-    }
+        .card {
+            width: 350px;
+            height: 220px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            /* --- 背景画像の設定 --- */
+            background-image: url('background.jpg'); /* ここを自分のファイル名に変えてください */
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
 
-    .name-area {
-        position: absolute;
-        top: 110px;  /* デザインの「名前欄」の位置に合わせて調整 */
-        left: 0;
-        width: 100%;
-        text-align: center;
-        font-size: 24px;
-        font-weight: bold;
-        text-shadow: 1px 1px 4px rgba(0,0,0,0.6); /* 文字を読みやすくする影 */
-    }
-</style>
+        /* 名前を表示する場所の調整 */
+        #displayName {
+            position: absolute;
+            top: 110px;  /* 上からの位置（画像に合わせて数字を変えてください） */
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: white; /* 文字の色（背景が明るいなら black に） */
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.8); /* 文字を見やすくする影 */
+        }
+    </style>
+</head>
+<body>
 
-<div class="card">
-    <div class="name-area" id="displayName">読み込み中...</div>
-</div>
+    <div class="card">
+        <div id="displayName">読み込み中...</div>
+    </div>
+
+    <script>
+        // URLの ?n=名前 を読み取って表示させる命令です
+        try {
+            const urlParams = new URLSearchParams(window.location.search);
+            const userName = urlParams.get('n');
+            
+            if (userName) {
+                document.getElementById('displayName').innerText = userName + ' 様';
+            } else {
+                document.getElementById('displayName').innerText = '名前がありません';
+            }
+        } catch (e) {
+            document.getElementById('displayName').innerText = 'エラー: ' + e.message;
+        }
+    </script>
+
+</body>
+</html>
